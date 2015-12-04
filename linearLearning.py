@@ -50,8 +50,7 @@ def der_quadLoss_dx(x, y):
     Note: The quad loss function does NOT add a factor of 1/2 in front of that loss (as often seen 
     with quadratic loss functions)
     """
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    return 2 * (x - y)
 
 def der_dot_dw(x, weights):
     """
@@ -63,8 +62,7 @@ def der_dot_dw(x, weights):
     
     Hint: You may not need all of the input arguments.
     """
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    return x
 
 def stochasticGradientDescentUpdate(datum, label, weights, alpha, der_loss_dw):
     """
@@ -86,9 +84,7 @@ def stochasticGradientDescentUpdate(datum, label, weights, alpha, der_loss_dw):
     of the derivative of the loss function with respect to each self.weights term
     [der_loss_dw1, der_loss_dw2, ...]
     """
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
-    
+    updatedWeights = weights - alpha * der_loss_dw(datum, label, weights)
     return updatedWeights
 
 def sigmoid(x):
@@ -317,8 +313,7 @@ class LinearRegression:
         Returns an array of the derivative of the loss function with respect to each self.weights term
         [der_loss_dw1, der_loss_dw2, ...]
         """
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        return der_quadLoss_dx(self.hypothesis(x), y_true) * x
 
 class BinaryLinearClassifier:
     """
