@@ -98,8 +98,7 @@ def sigmoid(x):
     Note that this is just the sigmoid function and there are no dot
     products with weights involved.
     """
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    return 1 / (1 + math.exp(-x))
 
 def der_sigmoid_dx(x):
     """
@@ -113,8 +112,8 @@ def der_sigmoid_dx(x):
     Hint: Find (look-up) a form of the derivative that can take
     advantage of the sigmoid function you already implemented.  
     """
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    p = sigmoid(x)
+    return p * (1-p)
 
 def softmax(x):
     """
@@ -313,7 +312,7 @@ class LinearRegression:
         Returns an array of the derivative of the loss function with respect to each self.weights term
         [der_loss_dw1, der_loss_dw2, ...]
         """
-        return der_quadLoss_dx(self.hypothesis(x), y_true) * x
+        return der_quadLoss_dx(self.hypothesis(x), y_true)*x
 
 class BinaryLinearClassifier:
     """
@@ -413,8 +412,8 @@ class BinaryLinearClassifier:
         Note: No need to worry about a bias term. If one exists, it 
         has already been included in both x and self.weights.
         """
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        a = np.dot(x, self.weights)
+        return sigmoid(a)
 
     def classificationLoss(self, x_data, y_data):
         """
@@ -433,8 +432,8 @@ class BinaryLinearClassifier:
         Quadratic loss comparing label y_true to the hypothesis for a single data point x
         Returns a single float value for the loss
         """
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        a = self.hypothesis(x)
+        return quadLoss(a, y_true)
 
     def der_loss_dw(self, x, y_true, weights):
         """
@@ -453,8 +452,12 @@ class BinaryLinearClassifier:
         three functions involved in the complete loss function. For example, if you wanted to use der_sigmoid_dx,
         what value would you need to pass as input to that function?
         """
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        a = self.hypothesis(x)
+        j = np.dot(x, weights)
+        v = der_dot_dw(x, weights) 
+        a1 = der_quadLoss_dx(a, y_true)
+        b = der_sigmoid_dx(j)
+        return a1 * b * v
 
 class MulticlassLinearClassifier:
     """
@@ -624,4 +627,3 @@ class OneVsRestLinearClassifier:
             bestLabel = self.legalLabels[bestLabelIndex]
             predicted_labels.append(bestLabel)
         return predicted_labels
-
