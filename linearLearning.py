@@ -132,8 +132,12 @@ def softmax(x):
     Note that this is just the sigmoid function and there are no dot
     products with weights involved.
     """
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    total_sum = np.sum(np.exp(x))
+    copy = np.exp(x)
+    copy = copy / total_sum
+    
+    return copy
+
 
 def der_softmax_dx(x, i, j):
     """
@@ -538,10 +542,15 @@ class MulticlassLinearClassifier:
         Note: No need to worry about a bias term. If one exists, it 
         has already been included in both x and self.weights[i].
         """
+    
         numClasses = len(self.legalLabels)
 
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        dot = []
+        for i in range(numClasses):
+            dot.append(np.dot(x, self.weights[i]))
+            
+        return softmax(np.array(dot))
+        
 
     def classificationLoss(self, x_data, y_data):
         """
